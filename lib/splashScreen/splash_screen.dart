@@ -1,33 +1,39 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:seller_app_delivery/authenAuthentication/auth_screen.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+import '../authenAuthentication/auth_screen.dart';
+import '../global/global.dart';
+import '../mainScreens/home_screen.dart';
+
+
+
+
+class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-
+  _MySplashScreenState createState() => _MySplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
 
 
+class _MySplashScreenState extends State<MySplashScreen>
+{
   startTimer()
   {
     Timer(const Duration(seconds: 1), () async
     {
       //if seller is loggedin already
-
+      if(firebaseAuth.currentUser != null)
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+      }
+      //if seller is NOT loggedin already
+      else
       {
         Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
       }
-
-
-
-
     });
   }
 
@@ -37,9 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     startTimer();
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {

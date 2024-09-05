@@ -1,13 +1,23 @@
 import 'dart:io';
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../global/global.dart';
+import '../mainScreens/home_screen.dart';
+import '../widgets/custom_text_field.dart';
 import '../widgets/error_dialog.dart';
+import '../widgets/loading_dialog.dart';
+
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -278,7 +288,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                         getCurrentLocation();
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.amber,
+                        backgroundColor: Colors.amber,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -295,7 +305,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.cyan,
+                backgroundColor: Colors.cyan,
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               ),
               onPressed: ()

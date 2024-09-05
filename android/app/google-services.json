@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215226798593",
+    "project_id": "deliveryappnew-15dfb",
+    "storage_bucket": "deliveryappnew-15dfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215226798593:android:4ea7479d34118089f2a600",
+        "android_client_info": {
+          "package_name": "Majdi.com.seller_app_delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Cb-4A3q_V0ZrRLwRddw_cjLHvDf0ElU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
