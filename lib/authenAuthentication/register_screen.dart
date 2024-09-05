@@ -56,25 +56,52 @@ class _RegisterScreenState extends State<RegisterScreen>
     });
   }
 
-  getCurrentLocation() async
-  {
-    Position newPosition = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
+  getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-    position = newPosition;
+    // تحقق من تمكين خدمة الموقع
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // لا يتم تمكين الخدمة، لا يمكن المتابعة
+      return Future.error('خدمة الموقع غير مفعلة.');
+    }
 
-    placeMarks = await placemarkFromCoordinates(
-      position!.latitude,
-      position!.longitude,
-    );
+    // تحقق من حالة الأذونات
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.deniedForever) {
+        // تم رفض الإذن بشكل دائم
+        return Future.error('الأذونات مرفوضة بشكل دائم، لا يمكن طلب الأذونات.');
+      }
+    }
 
-    Placemark pMark = placeMarks![0];
+    try {
+      // الحصول على الموقع الحالي
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
 
-    completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+      this.position = position;
 
-    locationController.text = completeAddress;
+      // استخدام مكتبة geocoding للحصول على العنوان
+      List<Placemark> placeMarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      Placemark pMark = placeMarks[0];
+      completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+
+      locationController.text = completeAddress;
+
+      print('الموقع الحالي: ${position.latitude}, ${position.longitude}');
+    } catch (e) {
+      print('خطأ في الحصول على الموقع: $e');
+    }
   }
+
 
   Future<void> formValidation() async
   {

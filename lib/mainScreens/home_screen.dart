@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../authenAuthentication/auth_screen.dart';
 import '../global/global.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,29 +10,40 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-
-
 class _HomeScreenState extends State<HomeScreen> {
+  String name = "اسم افتراضي"; // تعيين القيمة الافتراضية
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPreferences(); // تهيئة SharedPreferences عند تحميل الشاشة
+  }
+
+  Future<void> initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      // استرجاع الاسم من SharedPreferences أو تعيين قيمة افتراضية
+      name = sharedPreferences?.getString("oooooooh") ?? "اسم افتراضي";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.cyan,
-                  Colors.amber,
-                ],
-                begin:  FractionalOffset(0.0, 0.0),
-                end:  FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
-                tileMode: TileMode.clamp,
-              )
+            gradient: LinearGradient(
+              colors: [Colors.cyan, Colors.amber],
+              begin: FractionalOffset(0.0, 0.0),
+              end: FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
+            ),
           ),
         ),
         title: Text(
-          sharedPreferences!.getString("name")!,
+          sharedPreferences?.getString("ohhh") ?? "الله معكي", // استخدام قيمة افتراضية
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -44,10 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.cyan,
           ),
-          onPressed: ()
-          {
-            firebaseAuth.signOut().then((value){
-              Navigator.push(context, MaterialPageRoute(builder: (c)=> const AuthScreen()));
+          onPressed: () {
+            firebaseAuth.signOut().then((value) {
+              Navigator.push(context, MaterialPageRoute(builder: (c) => const AuthScreen()));
             });
           },
         ),
