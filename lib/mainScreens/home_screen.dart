@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String name = "اسم افتراضي"; // تعيين القيمة الافتراضية
+  String name = "سوف نشتاق لك "; // تعيين القيمة الافتراضية
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       // استرجاع الاسم من SharedPreferences أو تعيين قيمة افتراضية
-      name = sharedPreferences?.getString("oooooooh") ?? "اسم افتراضي";
+      name = sharedPreferences?.getString('oooooooh') ?? "سوف نشتاق لك";
     });
   }
 
@@ -43,14 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         title: Text(
-          sharedPreferences?.getString("ohhh") ?? "الله معكي", // استخدام قيمة افتراضية
+          sharedPreferences?.getString("oooooooh") ?? "الله معك ", // استخدام قيمة افتراضية
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text("Logout"),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.cyan,
           ),
@@ -59,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(context, MaterialPageRoute(builder: (c) => const AuthScreen()));
             });
           },
+          child: const Text("الخروج"),
         ),
       ),
     );

@@ -22,7 +22,7 @@ class _MySplashScreenState extends State<MySplashScreen>
 {
   startTimer()
   {
-    Timer(const Duration(seconds: 1), () async
+    Timer(const Duration(seconds: 4), () async
     {
       //if seller is loggedin already
       if(firebaseAuth.currentUser != null)
@@ -64,11 +64,11 @@ class _MySplashScreenState extends State<MySplashScreen>
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(
-                  "Sell Food Online",
+                  "يا هلا فيك بأوردلي",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 40,
+                    fontSize: 50,
                     fontFamily: "Signatra",
                     letterSpacing: 3,
                   ),

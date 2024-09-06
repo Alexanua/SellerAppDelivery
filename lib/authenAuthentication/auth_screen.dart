@@ -34,10 +34,10 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
           automaticallyImplyLeading: false,
           title: const Text(
-            "Ordeli",
+            "ORDELI",
             style: TextStyle(
               fontSize: 60,
-              color: Colors.white,
+              color: Colors.brown,
               fontFamily: "Lobster",
             ),
           ),
@@ -46,11 +46,11 @@ class _AuthScreenState extends State<AuthScreen> {
             tabs: [
               Tab(
                 icon: Icon(Icons.lock, color: Colors.white,),
-                text: "Login",
+                text: "تسجيل الدخول",
               ),
               Tab(
                 icon: Icon(Icons.person, color: Colors.white,),
-                text: "Register",
+                text: "تسجيل الحساب",
               ),
             ],
             indicatorColor: Colors.white38,
